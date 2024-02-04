@@ -4,6 +4,7 @@ import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
 import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Slidbar/Sidebar";
+import'./indec.css'
 
 //Database
 import products from "./db/data";
@@ -17,17 +18,19 @@ function App() {
     setQuery(event.target.value);
   };
 
-  const filteredItems = products.filter((product) =>
-    product.title.toLocaleLowerCase().indexOf(query.toLocaleLowerCase() !== -1)
+  const filteredItems = products.filter(
+    (product) =>
+      product.title.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) !==
+      -1
   );
 
   //----Radio Filter-----
-  const handleChange = event => {
+  const handleChange = (event) => {
     setSelectedCategory(event.target.value);
   };
 
   //---Button Filter---
-  const handleClick = event => {
+  const handleClick = (event) => {
     setSelectedCategory(event.target.value);
   };
 
@@ -41,31 +44,33 @@ function App() {
     //Selected Filter
     if (selected) {
       filteredProducts = filteredProducts.filter(
-        ({ category, company, title}) =>
+        ({ category, company, title }) =>
           category === selected || company === selected || title === selected
       );
     }
 
-    return filteredProducts.map(({ img, title, star, reviews,newPrice, prevPrice}) => (
-      <Card
-        key={Math.random()}
-        img={img}
-        title={title}
-        star={star}
-        reviews={reviews}
-        newPrice={newPrice}
-        prevPrice={prevPrice}
-      />
-    ));
+    return filteredProducts.map(
+      ({ img, title, star, reviews, newPrice, prevPrice }) => (
+        <Card
+          key={Math.random()}
+          img={img}
+          title={title}
+          star={star}
+          reviews={reviews}
+          newPrice={newPrice}
+          prevPrice={prevPrice}
+        />
+      )
+    );
   }
- const result = filteredData(products, selectedCategory, query)
+  const result = filteredData(products, selectedCategory, query);
 
   return (
     <>
-      <Sidebar handleChange={handleChange}/>
-      <Navigation query={query}handelInputChange={handelInputChange}/>
-      <Recommended handleClick={handleClick}/>
-      <Products result={result}/>
+      <Sidebar handleChange={handleChange} />
+      <Navigation query={query} handelInputChange={handelInputChange} />
+      <Recommended handleClick={handleClick} />
+      <Products result={result} />
     </>
   );
 }
