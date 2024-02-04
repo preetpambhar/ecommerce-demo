@@ -1,4 +1,3 @@
-import { AiFillStar } from "react-icons/ai";
 import { BsFillBagHeartFill } from "react-icons/bs";
 
 function Card({ img, title, star, reviews,newPrice, prevPrice}) {
@@ -12,15 +11,16 @@ function Card({ img, title, star, reviews,newPrice, prevPrice}) {
     <h3 className="card-title">{title}</h3>
     <section className="card-reviews">
      {star}{star}{star}{star}
-     <span className="totl-reviews">{reviews}</span>
+     <span className="totol-reviews">{reviews}</span>
     </section>
     <section className="card-price">
       <div className="price">
         <del>{prevPrice}</del> {newPrice}
       </div>
-
-      <div className="bag">
-        <BsFillBagHeartFill className="bag-icon"/>
+    </section>
+    <section>
+    <div className="card-footer">
+        <button > <BsFillBagHeartFill className="bag-icon"/> Add To Cart</button>
       </div>
     </section>
   </div>

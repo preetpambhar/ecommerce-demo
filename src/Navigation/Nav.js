@@ -1,25 +1,22 @@
 import { AiOutlineShoppingCart, AiOutlineUserAdd } from "react-icons/ai";
 import "./Nav.css";
+import {Link} from'react-router-dom';
 
-function Nav({handelInputChange, query}) {
+function Nav() {
   return (
     <nav>
-      <div className="nav-container">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Enter your shoes search."
-          onChange={handelInputChange}
-          value={query}
-        />
+       <div className="logo-container">
+        <Link to="/">
+        <h1>🛒</h1>
+        </Link>
       </div>
       <div className="profile-container">
-        <a href="#">
+        <Link to="cart">
           <AiOutlineShoppingCart className="nav-icons" />
-        </a>
-        <a href="#">
+        </Link>
+        <Link to="account">
           <AiOutlineUserAdd className="nav-icons" />
-        </a>
+        </Link>
       </div>
     </nav>
   );
