@@ -4,7 +4,7 @@ import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
 import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Slidbar/Sidebar";
-import'./indec.css'
+import'./index.css'
 
 //Database
 import products from "./db/data";
@@ -14,7 +14,7 @@ function App() {
   const [query, setQuery] = useState("");
 
   //----input Filter----
-  const handelInputChange = (event) => {
+  const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
 
@@ -65,12 +65,13 @@ function App() {
   }
   const result = filteredData(products, selectedCategory, query);
 
+  const [cart, setCart] = useState([])
   return (
     <>
       <Sidebar handleChange={handleChange} />
-      <Navigation query={query} handelInputChange={handelInputChange} />
-      <Recommended handleClick={handleClick} />
-      <Products result={result} />
+      {/* <Navigation query={query} handelInputChange={handelInputChange} /> */}
+      <Recommended handleClick={handleClick} query={query} handleInputChange={handleInputChange}/>
+      <Products result={result}/>
     </>
   );
 }
