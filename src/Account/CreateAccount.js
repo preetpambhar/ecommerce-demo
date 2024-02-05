@@ -42,14 +42,6 @@ const Createaccount = ({ toggleForm }) => {
         />
         <button type="submit">Sign Up</button>
       </form>
-      <div className="form-footer">
-        <p>
-          Already have an account?{' '}
-          <span className="form-link" onClick={toggleForm}>
-            Login
-          </span>
-        </p>
-      </div>
     </div>
   )
 }
