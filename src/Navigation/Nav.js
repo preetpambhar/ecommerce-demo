@@ -14,7 +14,7 @@ function Nav() {
         <Link to="cart">
           <AiOutlineShoppingCart className="nav-icons" />
         </Link>
-        <Link to="account">
+        <Link to="createaccount">
           <AiOutlineUserAdd className="nav-icons" />
         </Link>
       </div>
