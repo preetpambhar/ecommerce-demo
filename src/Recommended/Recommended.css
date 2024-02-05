@@ -21,3 +21,7 @@
     color: #323232;
     cursor: pointer;
 }
+
+.search-input{
+    border: 0.5px solid gray;
+}

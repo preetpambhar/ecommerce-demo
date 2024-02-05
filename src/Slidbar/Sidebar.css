@@ -2,6 +2,7 @@
     font-size: 22px;
     font-weight:normal;
     margin-bottom: 20px;
+    margin-top: 1.2rem;
 }
 
 .sidebar{
@@ -15,10 +16,3 @@
     align-items: center;
 }
 
-.logo-container{
-    margin-bottom: 4rem;
-}
-
-.logo-container h1{
-    margin-top: 1.3rem;
-}
