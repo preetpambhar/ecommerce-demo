@@ -1,33 +1,118 @@
 import { BsFillBagHeartFill } from "react-icons/bs";
-import {Link} from'react-router-dom';
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-function Card({ img, title, star, reviews,newPrice, prevPrice}) {
-  return ( 
-  <section className="card">
-  <img
-    src={img}
-    alt={title} className="card-img"
-  ></img>
-  <div className="card-details">
-    <Link to="productview">
-    <h3 className="card-title">{title}</h3>
-    </Link>
-    <section className="card-reviews">
-     {star}{star}{star}{star}
-     <span className="totol-reviews">{reviews}</span>
-    </section>
-    <section className="card-price">
-      <div className="price">
-        <del>{prevPrice}</del> {newPrice}
+function Card({
+  prod_id,
+  img,
+  title,
+  star,
+  reviews,
+  newPrice,
+  prevPrice,
+  qty,
+  handleUpdateIncrement,
+}) {
+  const handleAddToCart = (prod_id) => {
+    // Retrieve existing cart items from local storage
+    const existingCartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    let updatedCart = [];
+    if (existingCartItems.find((p) => p.prod_id === prod_id)) {
+      existingCartItems.map((p) => {
+        if (p.prod_id === prod_id) p.qty = p.qty + 1;
+      });
+      updatedCart = existingCartItems;
+
+      toast.success("Product quantity updated in cart!");
+    } else {
+      // Add the new product ID to the cart
+      updatedCart = [...existingCartItems, { prod_id, qty: 1 }];
+
+      toast.success("Product added in cart successfully!");
+    }
+
+    // Store the updated cart in local storage
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const handleQuantity = (prodId, operation) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (operation === "increase") {
+      existingCart.map((item) => {
+        if (item.prod_id === prodId) item.qty = item.qty + 1;
+      });
+    } else {
+      existingCart.map((item) => {
+        if (item.prod_id === prodId && item.qty != 1) item.qty = item.qty - 1;
+      });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+    handleUpdateIncrement();
+  };
+
+  const handleDelete =(prodId) =>{
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const updatedCart = existingCart.filter((item)=>item.prod_id != prodId)
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    handleUpdateIncrement();
+  }
+  return (
+    <section className="card">
+      <img src={img} alt={title} className="card-img"></img>
+      <div className="card-details">
+        <Link to="/productview">
+          <h3 className="card-title">{title}</h3>
+        </Link>
+        <section className="card-reviews">
+          {star}
+          {star}
+          {star}
+          {star}
+          <span className="totol-reviews">{reviews}</span>
+        </section>
+        <section className="card-price">
+          <div className="price">
+            {qty ? (
+              <>
+                $<del>{prevPrice * qty}</del> {newPrice * qty}
+              </>
+            ) : (
+              <>
+                $<del>{prevPrice}</del> {newPrice}
+              </>
+            )}
+          </div>
+        </section>
+        <section>
+          <div className="card-footer">
+            <button onClick={() => handleAddToCart(prod_id)}>
+              <BsFillBagHeartFill className="bag-icon" /> Add To Cart
+            </button>
+
+            {qty && (
+              <>
+                <button
+                  class="qty-button"
+                  onClick={() => handleQuantity(prod_id, "decrease")}
+                >
+                  -
+                </button>
+                {qty}
+                <button
+                  class="qty-button"
+                  onClick={() => handleQuantity(prod_id, "increase")}
+                >
+                  +
+                </button>
+
+                <button onClick={() => handleDelete(prod_id)}>Delete</button>
+              </>
+            )}
+          </div>
+        </section>
       </div>
     </section>
-    <section>
-    <div className="card-footer">
-        <button onClick={()=> {}}><BsFillBagHeartFill className="bag-icon"/> Add To Cart</button>
-      </div>
-    </section>
-  </div>
-</section>
   );
 }
 
