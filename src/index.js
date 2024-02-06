@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <CreateAccount />,
       },
       {
-        path: "productview",
+        path: "productview/:prodId",
         element: <ProductView />,
       },
       {

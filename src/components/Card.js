@@ -16,6 +16,7 @@ function Card({
   const handleAddToCart = (prod_id) => {
     // Retrieve existing cart items from local storage
     const existingCartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
     let updatedCart = [];
     if (existingCartItems.find((p) => p.prod_id === prod_id)) {
       existingCartItems.map((p) => {
@@ -51,17 +52,17 @@ function Card({
     handleUpdateIncrement();
   };
 
-  const handleDelete =(prodId) =>{
+  const handleDelete = (prodId) => {
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = existingCart.filter((item)=>item.prod_id != prodId)
+    const updatedCart = existingCart.filter((item) => item.prod_id != prodId);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     handleUpdateIncrement();
-  }
+  };
   return (
     <section className="card">
       <img src={img} alt={title} className="card-img"></img>
       <div className="card-details">
-        <Link to="/productview">
+        <Link to={`/productview/${prod_id}`}>
           <h3 className="card-title">{title}</h3>
         </Link>
         <section className="card-reviews">
@@ -86,9 +87,11 @@ function Card({
         </section>
         <section>
           <div className="card-footer">
-            <button onClick={() => handleAddToCart(prod_id)}>
-              <BsFillBagHeartFill className="bag-icon" /> Add To Cart
-            </button>
+            {!qty && (
+              <button onClick={() => handleAddToCart(prod_id)}>
+                <BsFillBagHeartFill className="bag-icon" /> Add To Cart
+              </button>
+            )}
 
             {qty && (
               <>

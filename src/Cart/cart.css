@@ -1,37 +1,37 @@
-.container {
-    font-family: sans-serif;
-    margin: 20px;
-  }
-  .main-cart{
-    display: flex;
-    justify-content: space-around;
-  }
+/* .container {
+  font-family: sans-serif;
+  margin: 20px;
+} */
 
-  .Right {
-    padding: 20px;
-    width:40% ;
-  }
-  
-  .Left {
-    background-color: #f8f5f5; /* Adjust the background color as needed */
-    padding: 20px;
-    width: 100%;
-  }
-  
+.main-cart {
+  display: flex;
+  justify-content: space-around;
+}
 
-.main-cart h1{
-    background-color: #f0f0f1; /* Adjust the background color as needed */
-    padding: 20px;
-    width: 100%;
-  }
+.Right {
+  padding: 20px;
+  width: 40%;
+}
 
-.main-cart h2{
-    padding: 20px;
-    width: 100%;
-  }
+.Left {
+  background-color: #f8f5f5; /* Adjust the background color as needed */
+  padding: 20px;
+  width: 100%;
+}
 
-.main-cart button{
-  background-color: #4CAF50;
+.main-cart h1 {
+  background-color: #f0f0f1; /* Adjust the background color as needed */
+  padding: 20px;
+  width: 100%;
+}
+
+.main-cart h2 {
+  padding: 20px;
+  width: 100%;
+}
+
+.button1 {
+  background-color: #4caf50;
   color: white;
   margin-left: 15px;
   padding: 10px 15px;

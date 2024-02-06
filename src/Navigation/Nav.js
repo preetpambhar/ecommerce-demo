@@ -1,13 +1,13 @@
 import { AiOutlineShoppingCart, AiOutlineUserAdd } from "react-icons/ai";
 import "./Nav.css";
-import {Link} from'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Nav() {
   return (
     <nav>
-       <div className="logo-container">
+      <div className="logo-container">
         <Link to="/">
-        <h1>🛒</h1>
+          <h1>WEST 49</h1>
         </Link>
       </div>
       <div className="profile-container">
