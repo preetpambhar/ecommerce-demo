@@ -1,6 +1,6 @@
 import { AiFillStar } from "react-icons/ai";
 
-const data = [
+export const data = [
   {
     prod_id: 1,
     img: "https://m.media-amazon.com/images/I/6125yAfsJKL._AC_UX575_.jpg",
