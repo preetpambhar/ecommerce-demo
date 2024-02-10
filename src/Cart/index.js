@@ -82,7 +82,6 @@ export default function Cart() {
       </div>
       <div className="Right">
         <h1>Total</h1>
-
         <h2>Sub Total: ${itemSubTotal}</h2>
         <h2>Tax 13%: ${itemTax}</h2>
         <h2>Grand Total: ${itemTotal}</h2>

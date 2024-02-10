@@ -89,7 +89,8 @@ function Card({
           <div className="card-footer">
             {!qty && (
               <button onClick={() => handleAddToCart(prod_id)}>
-                <BsFillBagHeartFill className="bag-icon" /> Add To Cart
+                <BsFillBagHeartFill className="bag-icon" />{" "}
+                <label className="button-label">Add To Cart</label>
               </button>
             )}
 
