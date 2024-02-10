@@ -60,7 +60,7 @@ const ProductView = () => {
   console.log(product.name);
   return (
     <div>
-      <h1>ProductView</h1>
+      <h1 className="title">ProductView</h1>
       <div class="product-container">
         <img class="product-image" src={product.img} alt="Product Image" />
         <div class="product-details">

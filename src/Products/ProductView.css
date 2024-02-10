@@ -12,6 +12,10 @@ header {
   padding: 1em;
 }
 
+.title {
+  padding: 12px 2px;
+}
+
 .product-container {
   max-width: 750px;
   margin: 20px auto;
@@ -46,7 +50,7 @@ header {
 }
 
 .buy-button {
-  background-color: #007bff;
+  background-color: #4caf50;
   color: #fff;
   padding: 10px 20px;
   font-size: 1em;
@@ -55,7 +59,7 @@ header {
   cursor: pointer;
 }
 .qty-button {
-  background-color: #007bff;
+  background-color: #0f0f0f;
   color: #fff;
   padding: 10px 20px;
   font-size: 1em;

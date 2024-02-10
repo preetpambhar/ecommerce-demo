@@ -42,7 +42,8 @@
 }
 
 .bag-icon {
-  color: #535353;
+  color: #191717;
+  margin-top: 2px;
 }
 .card-footer {
   padding-top: 1rem;
@@ -50,7 +51,12 @@
 
 .card-footer button {
   padding: 5px 10px;
-  background-color: #f3ac4f;
+  background-color: #4caf50;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.button-label {
+  align-items: center;
 }
