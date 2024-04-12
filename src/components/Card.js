@@ -1,3 +1,4 @@
+import { AiFillStar } from "react-icons/ai";
 import { BsFillBagHeartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,6 +14,14 @@ function Card({
   qty,
   handleUpdateIncrement,
 }) {
+  const renderStarRating = (rating) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(<AiFillStar className="rating-star" key={i} />);
+    }
+    return stars;
+  };
+
   const handleAddToCart = (prod_id) => {
     // Retrieve existing cart items from local storage
     const existingCartItems = JSON.parse(localStorage.getItem("cart")) || [];
@@ -66,10 +75,7 @@ function Card({
           <h3 className="card-title">{title}</h3>
         </Link>
         <section className="card-reviews">
-          {star}
-          {star}
-          {star}
-          {star}
+          {renderStarRating(star)} {}
           <span className="totol-reviews">{reviews}</span>
         </section>
         <section className="card-price">

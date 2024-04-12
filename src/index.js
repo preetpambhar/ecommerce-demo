@@ -9,7 +9,6 @@ import ProductView from "./Products/ProductView";
 import Layout from "./Layout/Layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const router = createBrowserRouter([
   {
     path: "/",

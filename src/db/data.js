@@ -41,7 +41,7 @@ export const data = [
     prod_id: 4,
     img: "https://m.media-amazon.com/images/I/71oEKkghg-L._AC_UX575_.jpg",
     title: "Nike Running Shoe",
-    star: <AiFillStar className="rating-star" />,
+    star: 3,
     reviews: "(123 reviews)",
     prevPrice: "555",
     newPrice: "200",
