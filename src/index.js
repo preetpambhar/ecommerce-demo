@@ -4,6 +4,7 @@ import App from "./App";
 import Cart from "./Cart";
 import CreateAccount from "./Account/CreateAccount";
 import Account from "./Account/account";
+import Login from "./Account/login";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ProductView from "./Products/ProductView";
 import Layout from "./Layout/Layout";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "account",
         element: <Account />,
+      },
+      {
+        path: "login",
+        element: <Login />,
       },
     ],
   },

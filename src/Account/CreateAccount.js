@@ -1,28 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./CreateAccount.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Createaccount = ({ toggleForm }) => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [shippingAddress, setShippingAddress] = useState("");
 
-  useEffect(() => {
-    const existingUser = JSON.parse(localStorage.getItem("user")) || {};
-    if (existingUser?.email) {
-      // user is already logged in
-      navigate("account");
-    }
-  });
-
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // Add logic for handling sign up (e.g., sending data to a server)
-    localStorage.setItem("user", JSON.stringify({ email: userEmail }));
-    console.log("Signing up with:", userEmail, password);
-    toast.success("Registered Successfuly");
-    navigate("/account");
+
+    try {
+      const response = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          email: userEmail,
+          password: password,
+          shipping_address: shippingAddress,
+          // You can include other fields like username and shipping_address here if needed
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Registered successfully");
+        navigate("/account");
+      } else {
+        // Handle registration failure
+        const data = await response.json();
+        toast.error(data.message || "Failed to register");
+      }
+    } catch (error) {
+      // Handle network errors
+      console.error("Error registering user:", error.message);
+      toast.error("Failed to register. Please try again later.");
+    }
+  };
+
+  const handleLoginRedirect = () => {
+    // Redirect to the login page
+    navigate("/login");
   };
 
   return (
@@ -35,6 +58,14 @@ const Createaccount = ({ toggleForm }) => {
           type="text"
           name="username"
           placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          name="email"
+          placeholder="email"
           value={userEmail}
           onChange={(e) => setUserEmail(e.target.value)}
           required
@@ -47,7 +78,19 @@ const Createaccount = ({ toggleForm }) => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <input
+          type="text"
+          name="shipping_address"
+          placeholder="shipping address"
+          value={shippingAddress}
+          onChange={(e) => setShippingAddress(e.target.value)}
+          required
+        />
         <button type="submit">Sign Up</button>
+        <span>Already have account ?</span>
+        <button type="button" onClick={handleLoginRedirect}>
+          Login
+        </button>
       </form>
     </div>
   );

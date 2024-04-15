@@ -1,4 +1,5 @@
 import { AiFillStar } from "react-icons/ai";
+import { useState, useEffect } from "react";
 import { BsFillBagHeartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -67,6 +68,7 @@ function Card({
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     handleUpdateIncrement();
   };
+
   return (
     <section className="card">
       <img src={img} alt={title} className="card-img"></img>

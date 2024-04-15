@@ -65,11 +65,11 @@ function App() {
           category === selected || company === selected || title === selected
       );
     }
-
+    console.log("filteredProducts: ", filteredProducts);
     return filteredProducts.map(
-      ({ prod_id, img, title, star, reviews, newPrice, prevPrice }) => (
+      ({ _id, img, title, star, reviews, newPrice, prevPrice }) => (
         <Card
-          prod_id={prod_id}
+          prod_id={_id}
           key={Math.random()}
           img={img}
           title={title}

@@ -13,12 +13,31 @@ const ProductView = () => {
   console.log({ prodId });
 
   useEffect(() => {
-    // Find the product with the matching id
-    const selectedProduct = data.find(
-      (product) => product.prod_id === parseInt(prodId)
-    );
-    setProduct(selectedProduct);
+    // Fetch product details when component mounts
+    fetchProductDetails(prodId);
   }, [prodId]);
+
+  const fetchProductDetails = async (prod_id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/products/${prod_id}`);
+      if (response.ok) {
+        const productData = await response.json();
+        setProduct(productData);
+      } else {
+        console.error("Failed to fetch product details");
+      }
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   // Find the product with the matching id
+  //   const selectedProduct = data.find(
+  //     (product) => product.prod_id === parseInt(prodId)
+  //   );
+  //   setProduct(selectedProduct);
+  // }, [prodId]);
 
   if (!product) {
     return <div>Loading...</div>; // You can show a loading indicator while fetching the product
