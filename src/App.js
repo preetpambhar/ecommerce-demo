@@ -65,7 +65,7 @@ function App() {
           category === selected || company === selected || title === selected
       );
     }
-    console.log("filteredProducts: ", filteredProducts);
+
     return filteredProducts.map(
       ({ _id, img, title, star, reviews, newPrice, prevPrice }) => (
         <Card

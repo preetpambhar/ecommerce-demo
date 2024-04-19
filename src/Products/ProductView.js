@@ -66,17 +66,6 @@ const ProductView = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  const handleQuantity = (operation) => {
-    if (operation === "increase") {
-      setQuantity(quantity + 1);
-    } else {
-      if (quantity != 1) {
-        setQuantity(quantity - 1);
-      }
-    }
-  };
-
-  console.log(product.name);
   return (
     <div>
       <h1 className="title">ProductView</h1>
