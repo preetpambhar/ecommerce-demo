@@ -1,10 +1,10 @@
 import { AiFillStar } from "react-icons/ai";
-import { useState, useEffect } from "react";
 import { BsFillBagHeartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Card({
+  cartProdId,
   prod_id,
   img,
   title,
@@ -13,7 +13,8 @@ function Card({
   newPrice,
   prevPrice,
   qty,
-  handleUpdateIncrement,
+  handleQuantity,
+  handleDelete,
 }) {
   const renderStarRating = (rating) => {
     const stars = [];
@@ -26,47 +27,77 @@ function Card({
   const handleAddToCart = (prod_id) => {
     // Retrieve existing cart items from local storage
     const existingCartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const user = localStorage.getItem("user");
+    let userId = null;
+    if (user) userId = JSON.parse(user)?.userId;
 
     let updatedCart = [];
-    if (existingCartItems.find((p) => p.prod_id === prod_id)) {
+    const itemExists = existingCartItems.find((p) => p.prod_id === prod_id);
+
+    if (itemExists) {
       existingCartItems.map((p) => {
         if (p.prod_id === prod_id) p.qty = p.qty + 1;
       });
       updatedCart = existingCartItems;
 
+      if (userId) {
+        // update qty in Cart
+        const requestOptions = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            quantity: itemExists.qty,
+          }),
+          redirect: "follow",
+        };
+
+        fetch(
+          `http://localhost:5000/carts/${itemExists.cartProdId}`,
+          requestOptions
+        )
+          .then((response) => response.text())
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => console.error(error));
+      }
+
       toast.success("Product quantity updated in cart!");
     } else {
       // Add the new product ID to the cart
-      updatedCart = [...existingCartItems, { prod_id, qty: 1 }];
+      updatedCart = [...existingCartItems, { prod_id, qty: 1, userId }];
+
+      if (userId) {
+        // add cart in database
+        const raw = JSON.stringify({
+          product_id: prod_id,
+          quantity: 1,
+          user_id: userId,
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch("http://localhost:5000/carts", requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.error(error));
+      }
 
       toast.success("Product added in cart successfully!");
     }
 
     // Store the updated cart in local storage
+    console.log("updatedCart: ", updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
-
-  const handleQuantity = (prodId, operation) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (operation === "increase") {
-      existingCart.map((item) => {
-        if (item.prod_id === prodId) item.qty = item.qty + 1;
-      });
-    } else {
-      existingCart.map((item) => {
-        if (item.prod_id === prodId && item.qty != 1) item.qty = item.qty - 1;
-      });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(existingCart));
-    handleUpdateIncrement();
-  };
-
-  const handleDelete = (prodId) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = existingCart.filter((item) => item.prod_id != prodId);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    handleUpdateIncrement();
   };
 
   return (
@@ -106,19 +137,19 @@ function Card({
               <>
                 <button
                   class="qty-button"
-                  onClick={() => handleQuantity(prod_id, "decrease")}
+                  onClick={() => handleQuantity(cartProdId, "decrease")}
                 >
                   -
                 </button>
                 {qty}
                 <button
                   class="qty-button"
-                  onClick={() => handleQuantity(prod_id, "increase")}
+                  onClick={() => handleQuantity(cartProdId, "increase")}
                 >
                   +
                 </button>
 
-                <button onClick={() => handleDelete(prod_id)}>Delete</button>
+                <button onClick={() => handleDelete(cartProdId)}>Delete</button>
               </>
             )}
           </div>
