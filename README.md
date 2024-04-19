@@ -1,3 +1,33 @@
+# Shoe Store Website
+
+This project is a shoe store website built using React and Express.js. It provides functionalities for browsing different shoe products, adding them to the cart, and placing orders.
+
+## Features
+
+- Browse shoe products by category
+- View product details including title, image, price, and reviews
+- Add products to the cart
+- Update the quantity of products in the cart
+- Remove products from the cart
+- Place orders
+- View user account details
+
+## Technologies Used
+
+- React: Frontend framework for building user interfaces
+- Express.js: Backend framework for building web applications
+- React Router DOM: For client-side routing
+- React Toastify: For displaying notifications
+- Local Storage: For storing user and cart data locally
+- Axios: For making HTTP requests to the server
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone <https://github.com/preetpambhar/ecommerce-demo.git>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
