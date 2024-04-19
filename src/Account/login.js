@@ -25,6 +25,11 @@ const Login = () => {
 
       if (response.ok) {
         toast.success("Logged in successfully");
+        const res = await response.json();
+        console.log("data: ", res);
+        // Update existing cart or create a new one
+        updateCartWithUserId(res.data.userId);
+        localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/account"); // Redirect to the account page upon successful login
       } else {
         const data = await response.json();
@@ -36,6 +41,18 @@ const Login = () => {
     }
   };
 
+  const updateCartWithUserId = (userId) => {
+    // Check if there's an existing cart in localStorage
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // If there's an existing cart, update it with the user's ID
+    if (existingCart.length > 0) {
+      const updatedCart = existingCart.map((item) => {
+        return { ...item, userId };
+      });
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    }
+  };
   return (
     <div className="form-container">
       <div className="form-header">
