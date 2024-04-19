@@ -19,7 +19,7 @@ This project is a shoe store website built using React and Express.js. It provid
 - React Router DOM: For client-side routing
 - React Toastify: For displaying notifications
 - Local Storage: For storing user and cart data locally
-- Axios: For making HTTP requests to the server
+- Fetch: For making HTTP requests to the server
 
 ## Installation
 
